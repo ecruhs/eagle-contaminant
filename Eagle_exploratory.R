@@ -234,3 +234,51 @@ ggsave(file = "figures/2023-Total_count.pdf",
 
 mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
 summary(mod8) #almost all if poisson, some marginal if gaussian
+
+
+
+
+
+
+##### OKAY NOW LETS TRY TO LOOK AT PATTERNS OVER TIME FOR EACH TOXICANT. 
+### Make the toxicant data the long format
+#start with 2023
+library(reshape2)
+subset.dat = subset(data, select = c(1,9,11,27:65))
+str(subset.dat)
+library(dplyr)
+subset.dat$field_id <- as.factor(subset.dat$field_id)
+subset.dat$county <- as.factor(subset.dat$county)
+subset.dat$year <- as.factor(subset.dat$year)
+subset.dat <- subset.dat %>% mutate_if(is.character, as.numeric)
+str(subset.dat)
+
+long.dat <- melt(subset.dat, by="field_id")
+head(long.dat)
+names(long.dat)[names(long.dat)=="variable"] <- "toxicant"
+names(long.dat)[names(long.dat)=="value"] <- "value"
+head(long.dat)
+
+long.dat2 = subset(long.dat, toxicant =="FTSA10_2"|toxicant =="FTSA8_2"|toxicant =="FOSA"|toxicant =="N_ETFOSAA"|
+                          toxicant =="N_MEFOSAA"|toxicant =="PFBA"|toxicant =="PFDA"|toxicant =="PFDOA"|toxicant =="PFDS"|
+                          toxicant =="PFHPA"|toxicant =="PFHPS"|toxicant =="PFHXS"|toxicant =="PFNA"|toxicant =="PFNS"|
+                          toxicant =="PFOA"|toxicant =="PFOS"|toxicant =="PFTEDA"|toxicant =="PFTRDA"|toxicant =="PFUNDA"|
+                          toxicant =="TOTAL_PFAS")
+
+#this dataset needs to be filled in more
+p9 <- ggplot(long.dat) + 
+  geom_point(aes(x=county, y=value, color=year)) + theme_bw()+
+  theme(axis.title = element_blank(),axis.text.x = element_blank(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p9)
+
+ggsave(file = "figures/2023-contaminants.pdf",
+       plot=p1,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
