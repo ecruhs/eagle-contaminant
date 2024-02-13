@@ -1,4 +1,4 @@
-homewd <- "/Users/emilyruhs/Desktop/"
+homewd <- "/Users/emilyruhs/Desktop/UChi_Brook_Lab/GitHub_repos/eagle-contaminant/"
 setwd(homewd)
 
 library(ggplot2)
@@ -13,11 +13,11 @@ names(data)
 #   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
 #   facet_grid(StudyArea~AnalyteName)
 
-data3 <- subset(data, StudyArea=="GBLM") #only green bay area
-
-ggplot(data=data3)+geom_point(aes(x=SampleYear, y=ResultNDZero))+theme_bw()+ 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  facet_grid(StudyArea~AnalyteName)
+# data3 <- subset(data, StudyArea=="GBLM") #only green bay area
+# 
+# ggplot(data=data3)+geom_point(aes(x=SampleYear, y=ResultNDZero))+theme_bw()+ 
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+#   facet_grid(StudyArea~AnalyteName)
 
 
 ### Make the toxicant data the long format
@@ -67,10 +67,170 @@ p1 <- ggplot(long.2023.dat2) +
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p1)
 
-ggsave(file = "Fig4/Output-figures/mountainplot_estpro.pdf",
-       plot=mountain.plot,
+ggsave(file = "figures/2023-contaminants.pdf",
+       plot=p1,
        units="mm",
-       width=70,
-       height=90,
+       width=80,
+       height=50,
        scale=3,
        dpi=300)
+
+#do any of these contaminants correlate with immune function variables?
+#need to add back in the immune data
+lab.2023.dat = subset(data2023, select = c(1,66,68,70,72:74,84:90))
+#ok remove a couple
+lab.2023.dat = subset(lab.2023.dat, select = -c(2))
+all.2023.dat <- merge(long.2023.dat2, lab.2023.dat, by="field_id")
+str(all.2023.dat)
+
+p2 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=T4_div_T3, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=T4_div_T3), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p2)
+
+ggsave(file = "figures/2023-T4_div_T3.pdf",
+       plot=p2,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod2 <- lm(T4_div_T3 ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod2) #nothing
+
+p3 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=Clysis, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=Clysis), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p3)
+
+ggsave(file = "figures/2023-Clysis.pdf",
+       plot=p3,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod3 <- lm(Clysis ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod3) #nothing
+
+
+p4 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=IgY_final, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=IgY_final), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p4)
+
+ggsave(file = "figures/2023-IgY.pdf",
+       plot=p4,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod4 <- lm(IgY_final ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod4)
+
+p5 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=H_L, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=H_L), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p5)
+
+ggsave(file = "figures/2023-HL.pdf",
+       plot=p5,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod5 <- lm(H_L ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod5) #some marginal significance - close to 0.1
+
+
+p6 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=Lperc, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=Lperc), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p6)
+
+ggsave(file = "figures/2023-Lperc.pdf",
+       plot=p6,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod6 <- glm(Lperc ~ toxicant:value, family="poisson",data=all.2023.dat) #should probably put sex and age in the model
+summary(mod6) #nothing
+
+
+p7 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=Hperc, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=Hperc), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p7)
+
+ggsave(file = "figures/2023-Hperc.pdf",
+       plot=p7,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod7 <- glm(Hperc ~ toxicant:value, family="poisson",data=all.2023.dat) #should probably put sex and age in the model
+summary(mod7) #nothing
+
+
+
+p8 <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=Total_count, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=Total_count), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(p8)
+
+ggsave(file = "figures/2023-Total_count.pdf",
+       plot=p8,
+       units="mm",
+       width=80,
+       height=50,
+       scale=3,
+       dpi=300)
+
+mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod8) #almost all if poisson, some marginal if gaussian
