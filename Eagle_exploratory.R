@@ -32,6 +32,32 @@ subset.2023.dat$county <- as.factor(subset.2023.dat$county)
 subset.2023.dat <- subset.2023.dat %>% mutate_if(is.character, as.numeric)
 str(subset.2023.dat)
 
+# long.2023.dat <- melt(subset.2023.dat, by="field_id")
+# head(long.2023.dat)
+# names(long.2023.dat)[names(long.2023.dat)=="variable"] <- "toxicant"
+# names(long.2023.dat)[names(long.2023.dat)=="value"] <- "value"
+# head(long.2023.dat)
+
+subset.2023.dat$carboxyl_sum <- (subset.2023.dat$PFBA) + (subset.2023.dat$PFHXA)+ 
+  (subset.2023.dat$PFHXDA) + (subset.2023.dat$PFOA) + (subset.2023.dat$PFDA) +
+  (subset.2023.dat$PFDOA) + (subset.2023.dat$PFODA) + (subset.2023.dat$PFPEA) +
+  (subset.2023.dat$PFUNDA) + (subset.2023.dat$PFTRDA) + (subset.2023.dat$PFTEDA) +
+  (subset.2023.dat$PFNA) + (subset.2023.dat$DONA) + (subset.2023.dat$PFHPA) +
+  (subset.2023.dat$PFMBA) + (subset.2023.dat$PFMPA)
+
+subset.2023.dat$sulfuric_sum <- (subset.2023.dat$FTSA10_2) +(subset.2023.dat$PF3OUDS11CL)+
+  (subset.2023.dat$FTSA4_2) + (subset.2023.dat$FTSA6_2) + (subset.2023.dat$CL_9PF3ONS) +
+  (subset.2023.dat$PFBS) + (subset.2023.dat$PFDS) + (subset.2023.dat$PFHPS) + 
+  (subset.2023.dat$PFHXS) + (subset.2023.dat$PFNS) + (subset.2023.dat$PFOS) +
+  (subset.2023.dat$PFPES) + (subset.2023.dat$FTSA8_2)
+
+subset.2023.dat$phosphate_sum <- (subset.2023.dat$DIPAP6_2) + (subset.2023.dat$DIPAP8_2)
+
+subset.2023.dat$amine_sum <- (subset.2023.dat$FOSA) + (subset.2023.dat$N_ETFOSA) + 
+  (subset.2023.dat$N_ETFOSAA) + (subset.2023.dat$N_ETFOSE) + (subset.2023.dat$N_MEFOSA)+
+  (subset.2023.dat$N_MEFOSAA) + (subset.2023.dat$N_MEFOSE) 
+
+
 long.2023.dat <- melt(subset.2023.dat, by="field_id")
 head(long.2023.dat)
 names(long.2023.dat)[names(long.2023.dat)=="variable"] <- "toxicant"
@@ -40,47 +66,57 @@ head(long.2023.dat)
 
 long.2023.dat$county2 <- factor(long.2023.dat$county, levels=c("WINNEBAGO", "OUTAGAMIE", "ASHLAND", "DOUGLAS", "BAYFIELD", "BROWN"))
 
-p1 <- ggplot(long.2023.dat) + 
+chemical.dat <- subset(long.2023.dat, toxicant=="carboxyl_sum" | toxicant=="sulfuric_sum" |
+  toxicant=="phosphate_sum" | toxicant=="amine_sum")
+
+chemical.dat <- subset(chemical.dat, toxicant!="phosphate_sum")
+
+p1 <- ggplot(chemical.dat) + 
   geom_boxplot(aes(x=county2, y=value, fill=county2)) + theme_bw()+
   theme(axis.title = element_blank(),axis.text.x = element_blank(),
-        strip.background = element_rect(fill="white"), axis.text.y = element_blank(), 
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(size=12), 
         panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
         strip.text.x = element_text(size = 13, face = "italic"), strip.text.y = element_text(size = 13),
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p1)
 #there are a lot of contaminants that are not detected, so let's remove those
-head(long.2023.dat)
-str(long.2023.dat)
-unique(long.2023.dat$toxicant)
-long.2023.dat2 = subset(long.2023.dat, toxicant =="FTSA10_2"|toxicant =="FTSA8_2"|toxicant =="FOSA"|toxicant =="N_ETFOSAA"|
-                          toxicant =="N_MEFOSAA"|toxicant =="PFBA"|toxicant =="PFDA"|toxicant =="PFDOA"|toxicant =="PFDS"|
-                          toxicant =="PFHPA"|toxicant =="PFHPS"|toxicant =="PFHXS"|toxicant =="PFNA"|toxicant =="PFNS"|
-                          toxicant =="PFOA"|toxicant =="PFOS"|toxicant =="PFTEDA"|toxicant =="PFTRDA"|toxicant =="PFUNDA"|
-                          toxicant =="TOTAL_PFAS")
-unique(long.2023.dat2$toxicant)
-p1 <- ggplot(long.2023.dat2) + 
-  geom_boxplot(aes(x=county2, y=value, fill=county2)) + theme_bw()+
-  theme(axis.title = element_blank(),axis.text.x = element_blank(),
-        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
-        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
-        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
-        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
-print(p1)
-
-ggsave(file = "figures/2023-contaminants.pdf",
+# head(long.2023.dat)
+# str(long.2023.dat)
+# unique(long.2023.dat$toxicant)
+# long.2023.dat2 = subset(long.2023.dat, toxicant =="FTSA10_2"|toxicant =="FTSA8_2"|toxicant =="FOSA"|toxicant =="N_ETFOSAA"|
+#                           toxicant =="N_MEFOSAA"|toxicant =="PFBA"|toxicant =="PFDA"|toxicant =="PFDOA"|toxicant =="PFDS"|
+#                           toxicant =="PFHPA"|toxicant =="PFHPS"|toxicant =="PFHXS"|toxicant =="PFNA"|toxicant =="PFNS"|
+#                           toxicant =="PFOA"|toxicant =="PFOS"|toxicant =="PFTEDA"|toxicant =="PFTRDA"|toxicant =="PFUNDA"|
+#                           toxicant =="TOTAL_PFAS")
+# unique(long.2023.dat2$toxicant)
+# p1 <- ggplot(long.2023.dat2) + 
+#   geom_boxplot(aes(x=county2, y=value, fill=county2)) + theme_bw()+
+#   theme(axis.title = element_blank(),axis.text.x = element_blank(),
+#         strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+#         panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+#         strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+#         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+# print(p1)
+# 
+ggsave(file = "figures/2023-contaminants-subgroups.pdf",
        plot=p1,
        units="mm",
-       width=80,
-       height=50,
+       width=90,
+       height=40,
        scale=3,
        dpi=300)
+
+aov1 <- aov(value~toxicant*county2, data=chemical.dat)
+summary(aov1)
+TukeyHSD(aov1)
+
 
 #do any of these contaminants correlate with immune function variables?
 #need to add back in the immune data
 lab.2023.dat = subset(data2023, select = c(1,66,68,70,72:74,84:90))
 #ok remove a couple
 lab.2023.dat = subset(lab.2023.dat, select = -c(2))
-all.2023.dat <- merge(long.2023.dat2, lab.2023.dat, by="field_id")
+all.2023.dat <- merge(chemical.dat, lab.2023.dat, by="field_id")
 str(all.2023.dat)
 
 p2 <- ggplot(all.2023.dat) + 
@@ -93,11 +129,11 @@ p2 <- ggplot(all.2023.dat) +
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p2)
 
-ggsave(file = "figures/2023-T4_div_T3.pdf",
+ggsave(file = "figures/2023-T4_div_T3_subgroups.pdf",
        plot=p2,
        units="mm",
        width=80,
-       height=50,
+       height=40,
        scale=3,
        dpi=300)
 
@@ -114,11 +150,11 @@ p3 <- ggplot(all.2023.dat) +
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p3)
 
-ggsave(file = "figures/2023-Clysis.pdf",
+ggsave(file = "figures/2023-Clysis_subgroups.pdf",
        plot=p3,
        units="mm",
        width=80,
-       height=50,
+       height=40,
        scale=3,
        dpi=300)
 
@@ -136,11 +172,11 @@ p4 <- ggplot(all.2023.dat) +
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p4)
 
-ggsave(file = "figures/2023-IgY.pdf",
+ggsave(file = "figures/2023-IgY_subgroups.pdf",
        plot=p4,
        units="mm",
        width=80,
-       height=50,
+       height=40,
        scale=3,
        dpi=300)
 
@@ -224,15 +260,15 @@ p8 <- ggplot(all.2023.dat) +
         legend.position = "left") + facet_wrap(~toxicant, scales = "free")
 print(p8)
 
-ggsave(file = "figures/2023-Total_count.pdf",
+ggsave(file = "figures/2023-Total_count_subgroups.pdf",
        plot=p8,
        units="mm",
        width=80,
-       height=50,
+       height=40,
        scale=3,
        dpi=300)
 
-mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat, family=poisson) #should probably put sex and age in the model
 summary(mod8) #almost all if poisson, some marginal if gaussian
 
 
