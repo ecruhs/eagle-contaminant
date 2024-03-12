@@ -1,12 +1,15 @@
-homewd <- "/Users/emilyruhs/Desktop/UChi_Brook_Lab/GitHub_repos/eagle-contaminant/"
-setwd(homewd)
 
+library(skimr) #data summary package
 library(ggplot2)
 
+homewd <- "/Users/emilyruhs/Desktop/UChi_Brook_Lab/GitHub_repos/eagle-contaminant/"
+setwd(homewd)
 data <- read.csv(file = paste0(homewd,"BaldEagle_EmilyGavin_Master_13Feb.csv"))
 
 names(data)
 
+dev.new()
+skim(data) #summarizes the data
 # data2 <- subset(data, AnalyteName!="Perflouro-1-Octanesulfonate")
 # 
 # ggplot(data=data2)+geom_point(aes(x=SampleYear, y=ResultNDZero))+theme_bw()+ 
