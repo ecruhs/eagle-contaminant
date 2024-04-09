@@ -170,8 +170,8 @@ lab.2023.dat = subset(data2023, select = c(1,66,68,70,72:74,84:90))
 #ok remove a couple
 lab.2023.dat = subset(lab.2023.dat, select = -c(2))
 all.2023.dat <- merge(long.2023.dat2, lab.2023.dat, by="field_id")
-#all.2023.dat <- merge(chain.dat, lab.2023.dat, by="field_id")
-#all.2023.dat <- merge(chemical.dat, lab.2023.dat, by="field_id")
+all.2023.dat <- merge(chain.dat, lab.2023.dat, by="field_id")
+all.2023.dat <- merge(chemical.dat, lab.2023.dat, by="field_id")
 str(all.2023.dat)
 
 p2 <- ggplot(all.2023.dat) + 
@@ -288,7 +288,7 @@ ggsave(file = "figures/2023-Lperc.pdf",
        scale=3,
        dpi=300)
 
-mod6 <- glm(Lperc ~ toxicant:value, family="poisson",data=all.2023.dat) #should probably put sex and age in the model
+mod6 <- glm(Lperc ~ toxicant:value, family="quasibinomial",data=all.2023.dat) #should probably put sex and age in the model
 summary(mod6) #nothing
 
 
@@ -310,7 +310,7 @@ ggsave(file = "figures/2023-Hperc.pdf",
        scale=3,
        dpi=300)
 
-mod7 <- glm(Hperc ~ toxicant:value, family="poisson",data=all.2023.dat) #should probably put sex and age in the model
+mod7 <- glm(Hperc ~ toxicant:value, family="quasibinomial",data=all.2023.dat) #should probably put sex and age in the model
 summary(mod7) #nothing
 
 
@@ -333,9 +333,8 @@ ggsave(file = "figures/2023-Total_count_subgroups_2.pdf",
        scale=3,
        dpi=300)
 
-mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat, family=gaussian) #should probably put sex and age in the model
-summary(mod8) #almost all if poisson, some marginal if gaussian
-
+mod8 <- glm(Total_count ~ toxicant:value, data=all.2023.dat, family=poisson) #should probably put sex and age in the model
+summary(mod8) #almost all if poisson
 
 
 
