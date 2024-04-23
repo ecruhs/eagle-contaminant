@@ -22,6 +22,20 @@ skim(data) #summarizes the data
 #   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
 #   facet_grid(StudyArea~AnalyteName)
 
+#add in a body condition index
+modBaseF <- lm(log10(mass_kg)~log10(foot_pad_mm), data=subset(data, DNA_sex=="F"))
+summary(modBaseF)
+
+modBaseM <- lm(log10(mass_kg)~log10(foot_pad_mm), data=subset(data, DNA_sex=="M"))
+summary(modBaseM)
+
+data$predicted_mass_kg <- NA
+data$predicted_mass_kg[data$DNA_sex=="F" & !is.na(data$mass_kg) &!is.na(data$foot_pad_mm)] <- 10^predict(modBaseF) #you are predicting log10 mass, so you need to exponent it here
+data$predicted_mass_kg[data$DNA_sex=="M"& !is.na(data$mass_kg) &!is.na(data$foot_pad_mm)] <- 10^predict(modBaseM)
+
+
+
+
 
 ### Make the toxicant data the long format
 #start with 2023
@@ -166,13 +180,26 @@ TukeyHSD(aov1)
 
 #do any of these contaminants correlate with immune function variables?
 #need to add back in the immune data
-lab.2023.dat = subset(data2023, select = c(1,66,68,70,72:74,84:90))
+lab.2023.dat = subset(data2023, select = c(1,66,68,70,72:74,84:91))
 #ok remove a couple
 lab.2023.dat = subset(lab.2023.dat, select = -c(2))
 all.2023.dat <- merge(long.2023.dat2, lab.2023.dat, by="field_id")
 all.2023.dat <- merge(chain.dat, lab.2023.dat, by="field_id")
 all.2023.dat <- merge(chemical.dat, lab.2023.dat, by="field_id")
 str(all.2023.dat)
+
+pCon <- ggplot(all.2023.dat) + 
+  geom_point(aes(x=value, y=predicted_mass_kg, shape=county)) + theme_bw()+
+  geom_smooth(aes(x=value, y=predicted_mass_kg), color="black", linewidth=0.5, method=lm, data=all.2023.dat)+
+  theme(axis.title = element_blank(), axis.text.x = element_text(),
+        strip.background = element_rect(fill="white"), axis.text.y = element_text(), 
+        panel.spacing.x  =  unit(c(.2), "cm"), panel.spacing.y  =  unit(c(0), "cm"),
+        strip.text.x = element_text(size = 12, face = "italic"), strip.text.y = element_text(size = 12),
+        legend.position = "left") + facet_wrap(~toxicant, scales = "free")
+print(pCon)
+
+mod_Con <- lm(predicted_mass_kg ~ toxicant:value, data=all.2023.dat) #should probably put sex and age in the model
+summary(mod_Con) #nothing
 
 p2 <- ggplot(all.2023.dat) + 
   geom_point(aes(x=value, y=T4_div_T3, shape=county)) + theme_bw()+
