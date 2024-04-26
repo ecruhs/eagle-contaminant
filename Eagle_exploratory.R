@@ -4,7 +4,7 @@ library(ggplot2)
 
 homewd <- "/Users/emilyruhs/Desktop/UChi_Brook_Lab/GitHub_repos/eagle-contaminant/"
 setwd(homewd)
-data <- read.csv(file = paste0(homewd,"BaldEagle_EmilyGavin_Master_13Feb.csv"))
+data <- read.csv(file = paste0(homewd,"working-data/BaldEagle_EmilyGavin_Master_13Feb.csv"))
 
 names(data)
 
