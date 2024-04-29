@@ -1,25 +1,25 @@
 ﻿animal,gavinID,treatment,species,age_days,mass_kg,sex,nest_name,county,total_pfas,PFOS,PFUNDA,PFNA,Carboxyl,Sulfuric,Amine,Shortchain,Longchain,LC_cat,Carb_cat,Sulf_cat
-Eagle_012_lps,12,lps,bald eagle,56.7,4.66,F,Hwy MM,BROWN,268.729,206,6.9,16.4,53.562,213.534,1.633,6.07,262.659,high,high,high
-Eagle_012_null,12,control,bald eagle,56.7,4.66,F,Hwy MM,BROWN,268.729,206,6.9,16.4,53.562,213.534,1.633,6.07,262.659,high,high,high
-Eagle_008_lps,8,lps,bald eagle,50,4.55,F,Brown Cty Fairgrounds,BROWN,258.711,195,5.4,15.6,56.879,200.113,1.719,3.812,254.899,high,high,high
-Eagle_008_null,8,control,bald eagle,50,4.55,F,Brown Cty Fairgrounds,BROWN,258.711,195,5.4,15.6,56.879,200.113,1.719,3.812,254.899,high,high,high
-Eagle_015_lps,15,lps,bald eagle,62.5,5.53,F,Barden Creek East,DOUGLAS,448.438,183,120,62.9,260.901,187.401,0.136,4.332,444.106,high,high,high
-Eagle_015_null,15,control,bald eagle,62.5,5.53,F,Barden Creek East,DOUGLAS,448.438,183,120,62.9,260.901,187.401,0.136,4.332,444.106,high,high,high
-Eagle_006_lps,6,lps,bald eagle,44,3.31,M,Hwy OO,OUTAGAMIE,188.247,166,4.14,3.8,18.096,170.151,0,3.878,184.369,low,low,high
-Eagle_006_null,6,control,bald eagle,44,3.31,M,Hwy OO,OUTAGAMIE,188.247,166,4.14,3.8,18.096,170.151,0,3.878,184.369,low,low,high
-Eagle_007_lps,7,lps,bald eagle,45.4,3.63,,Hwy 141,BROWN,188.034,154,3.21,6.89,27.524,158.8,1.71,3.37,184.664,low,low,high
-Eagle_007_null,7,control,bald eagle,45.4,3.63,,Hwy 141,BROWN,188.034,154,3.21,6.89,27.524,158.8,1.71,3.37,184.664,low,low,high
-Eagle_013_lps,13,lps,bald eagle,52.5,3.7,M,Port Wing East,BAYFIELD,296.47,125,75.4,42.4,168.42,128.05,0,2.936,293.534,high,high,high
-Eagle_013_null,13,control,bald eagle,52.5,3.7,M,Port Wing East,BAYFIELD,296.47,125,75.4,42.4,168.42,128.05,0,2.936,293.534,high,high,high
-Eagle_014_lps,14,lps,bald eagle,50.7,4.81,F,Barden Creek East,DOUGLAS,292.439,123,71.4,40.9,166.575,125.864,0,2.833,289.606,high,high,low
-Eagle_014_null,14,control,bald eagle,50.7,4.81,F,Barden Creek East,DOUGLAS,292.439,123,71.4,40.9,166.575,125.864,0,2.833,289.606,high,high,low
-Eagle_004_lps,4,lps,bald eagle,53.6,3.86,F,Menasha Treatment,WINNEBAGO,149.272,123,3.85,6.08,23.514,125.18,0.578,1.988,147.284,low,low,low
-Eagle_004_null,4,control,bald eagle,53.6,3.86,F,Menasha Treatment,WINNEBAGO,149.272,123,3.85,6.08,23.514,125.18,0.578,1.988,147.284,low,low,low
-Eagle_022_lps,22,lps,bald eagle,51.8,4.11,F,Spirit Point Road,BAYFIELD,282.66,120,74,38,160.033,122.627,0,2.72,279.94,high,high,low
-Eagle_022_null,22,control,bald eagle,51.8,4.11,F,Spirit Point Road,BAYFIELD,282.66,120,74,38,160.033,122.627,0,2.72,279.94,high,high,low
-Eagle_002_lps,2,lps,bald eagle,58.5,4.79,,Kimberly Clark,WINNEBAGO,151.715,118,8.5,6.14,29.406,121.525,0.784,3.358,148.357,low,low,low
-Eagle_002_null,2,control,bald eagle,58.5,4.79,,Kimberly Clark,WINNEBAGO,151.715,118,8.5,6.14,29.406,121.525,0.784,3.358,148.357,low,low,low
-Eagle_020_lps,20,lps,bald eagle,52.8,4.17,M,Mt. Ashwabay,BAYFIELD,95.969,60.2,14.4,6.74,33.798,62.171,0,1.899,94.07,low,low,low
-Eagle_020_null,20,control,bald eagle,52.8,4.17,M,Mt. Ashwabay,BAYFIELD,95.969,60.2,14.4,6.74,33.798,62.171,0,1.899,94.07,low,low,low
-Eagle_021_lps,21,lps,bald eagle,48.9,4.87,M,Mt. Ashwabay,BAYFIELD,70.043,42.5,9.72,5.66,25.929,44.114,0,1.662,68.381,low,low,low
-Eagle_021_null,21,control,bald eagle,48.9,4.87,M,Mt. Ashwabay,BAYFIELD,70.043,42.5,9.72,5.66,25.929,44.114,0,1.662,68.381,low,low,low
+Eagle_012_lps,12,lps,bald eagle,56.7,4.66,F,Hwy MM,BROWN,268.729,206,6.9,16.4,53.562,213.534,1.633,6.07,262.659,b,b,high
+Eagle_012_null,12,control,bald eagle,56.7,4.66,F,Hwy MM,BROWN,268.729,206,6.9,16.4,53.562,213.534,1.633,6.07,262.659,b,b,high
+Eagle_008_lps,8,lps,bald eagle,50,4.55,F,Brown Cty Fairgrounds,BROWN,258.711,195,5.4,15.6,56.879,200.113,1.719,3.812,254.899,b,b,high
+Eagle_008_null,8,control,bald eagle,50,4.55,F,Brown Cty Fairgrounds,BROWN,258.711,195,5.4,15.6,56.879,200.113,1.719,3.812,254.899,b,b,high
+Eagle_015_lps,15,lps,bald eagle,62.5,5.53,F,Barden Creek East,DOUGLAS,448.438,183,120,62.9,260.901,187.401,0.136,4.332,444.106,b,b,high
+Eagle_015_null,15,control,bald eagle,62.5,5.53,F,Barden Creek East,DOUGLAS,448.438,183,120,62.9,260.901,187.401,0.136,4.332,444.106,b,b,high
+Eagle_006_lps,6,lps,bald eagle,44,3.31,M,Hwy OO,OUTAGAMIE,188.247,166,4.14,3.8,18.096,170.151,0,3.878,184.369,a,a,high
+Eagle_006_null,6,control,bald eagle,44,3.31,M,Hwy OO,OUTAGAMIE,188.247,166,4.14,3.8,18.096,170.151,0,3.878,184.369,a,a,high
+Eagle_007_lps,7,lps,bald eagle,45.4,3.63,,Hwy 141,BROWN,188.034,154,3.21,6.89,27.524,158.8,1.71,3.37,184.664,a,a,high
+Eagle_007_null,7,control,bald eagle,45.4,3.63,,Hwy 141,BROWN,188.034,154,3.21,6.89,27.524,158.8,1.71,3.37,184.664,a,a,high
+Eagle_013_lps,13,lps,bald eagle,52.5,3.7,M,Port Wing East,BAYFIELD,296.47,125,75.4,42.4,168.42,128.05,0,2.936,293.534,b,b,high
+Eagle_013_null,13,control,bald eagle,52.5,3.7,M,Port Wing East,BAYFIELD,296.47,125,75.4,42.4,168.42,128.05,0,2.936,293.534,b,b,high
+Eagle_014_lps,14,lps,bald eagle,50.7,4.81,F,Barden Creek East,DOUGLAS,292.439,123,71.4,40.9,166.575,125.864,0,2.833,289.606,b,b,low
+Eagle_014_null,14,control,bald eagle,50.7,4.81,F,Barden Creek East,DOUGLAS,292.439,123,71.4,40.9,166.575,125.864,0,2.833,289.606,b,b,low
+Eagle_004_lps,4,lps,bald eagle,53.6,3.86,F,Menasha Treatment,WINNEBAGO,149.272,123,3.85,6.08,23.514,125.18,0.578,1.988,147.284,a,a,low
+Eagle_004_null,4,control,bald eagle,53.6,3.86,F,Menasha Treatment,WINNEBAGO,149.272,123,3.85,6.08,23.514,125.18,0.578,1.988,147.284,a,a,low
+Eagle_022_lps,22,lps,bald eagle,51.8,4.11,F,Spirit Point Road,BAYFIELD,282.66,120,74,38,160.033,122.627,0,2.72,279.94,b,b,low
+Eagle_022_null,22,control,bald eagle,51.8,4.11,F,Spirit Point Road,BAYFIELD,282.66,120,74,38,160.033,122.627,0,2.72,279.94,b,b,low
+Eagle_002_lps,2,lps,bald eagle,58.5,4.79,,Kimberly Clark,WINNEBAGO,151.715,118,8.5,6.14,29.406,121.525,0.784,3.358,148.357,a,a,low
+Eagle_002_null,2,control,bald eagle,58.5,4.79,,Kimberly Clark,WINNEBAGO,151.715,118,8.5,6.14,29.406,121.525,0.784,3.358,148.357,a,a,low
+Eagle_020_lps,20,lps,bald eagle,52.8,4.17,M,Mt. Ashwabay,BAYFIELD,95.969,60.2,14.4,6.74,33.798,62.171,0,1.899,94.07,a,a,low
+Eagle_020_null,20,control,bald eagle,52.8,4.17,M,Mt. Ashwabay,BAYFIELD,95.969,60.2,14.4,6.74,33.798,62.171,0,1.899,94.07,a,a,low
+Eagle_021_lps,21,lps,bald eagle,48.9,4.87,M,Mt. Ashwabay,BAYFIELD,70.043,42.5,9.72,5.66,25.929,44.114,0,1.662,68.381,a,a,low
+Eagle_021_null,21,control,bald eagle,48.9,4.87,M,Mt. Ashwabay,BAYFIELD,70.043,42.5,9.72,5.66,25.929,44.114,0,1.662,68.381,a,a,low

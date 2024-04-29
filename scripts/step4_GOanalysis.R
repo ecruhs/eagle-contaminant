@@ -40,7 +40,7 @@ makeOrgPackageFromNCBI(version = "0.1",
 install.packages("./org.Hleucocephalus.eg.db", repos=NULL)
 
 ## Makes an organism package for eagle data.frames:
-eagleFile <- system.file("extdata","eagle_info.txt",
+eagleFile <- system.file("extdata","working-data/GCF_000737465.1_Haliaeetus_leucocephalus-4.0_gene_ontology.txt",
                          package="AnnotationForge")
 eagle <- read.table(eagleFile,sep="\t")
 eagle <- read.csv("working-data/eagle_info.csv")
@@ -62,7 +62,7 @@ colnames(fSym) <- c("GID","SYMBOL","GENENAME")
 #now the GO analysis
 #downreg list first since it's smaller
 ggo <- groupGO(gene     = downreg.list,
-               OrgDb    = org.Hs.eg.db,
+               OrgDb    = org.Hl.eg.db,
                ont      = "CC",
                level    = 3,
                readable = TRUE)
