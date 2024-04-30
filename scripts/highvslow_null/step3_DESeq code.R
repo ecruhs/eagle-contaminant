@@ -19,17 +19,7 @@ library(ggplot2)
 
 setwd("/Users/emilyruhs/Desktop/UChi_Brook_Lab/GitHub_repos/eagle-contaminant")
 
-#upload data
-seqdata <- read.csv('working-data/RUHS_allcounts_edit.csv', header = TRUE, sep = ",")
-seqdata2 <- select(countData, c(1,7:30))
-
-head(countdata)
-str(countdata)
-#need to convert ensgene to a factor
-countdata$GeneID= as.factor(countdata$GeneID)
-
-sampleinfo = read.csv("working-data/eagle_metadata_null.csv")
-sampleinfo
+#run step2 until the save portion
 #-------------------------------------------------------------------------
 
 #Construct DESeqDataSet Object
@@ -114,10 +104,10 @@ res <- res[order(res$padj),]
 resSig <- subset(res, res$padj < 0.1) #setting p-value higher
 resSig<-resSig[ order( resSig$log2FoldChange ),]
 resSig_p01<-resSig[1:22,] #all the results - 22 genes is the length
-write.csv(resSig_p01,"output-data/resSig_p01.csv")
+write.csv(resSig_p01,"output-data/highvslow_null/resSig_p01.csv")
 
 
 resSig <- subset(res, res$padj < 0.05) #setting p-value higher
 resSig<-resSig[ order( resSig$log2FoldChange ),]
 resSig_p005<-resSig[1:15,] #all the results - 369 genes is the length
-write.csv(resSig_p005,"output-data/resSig_p005.csv")
+write.csv(resSig_p005,"output-data/highvslow_null/resSig_p005.csv")

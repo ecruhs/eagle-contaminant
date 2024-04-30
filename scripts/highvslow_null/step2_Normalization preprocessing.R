@@ -57,5 +57,5 @@ logNormalizedCounts=log2(normalizedCounts+1)
 
 
 save(countdata, sampleinfo, ddsObj,normalizedCounts,logNormalizedCounts, file="preprocessing.RData")
-write.csv(normalizedCounts, file="output-data/normalizedcounts.csv")
-write.csv(logNormalizedCounts, file="output-data/lognormalizedcounts.csv")
+write.csv(normalizedCounts, file="output-data/highvslow_null/normalizedcounts.csv")
+write.csv(logNormalizedCounts, file="output-data/highvslow_null/lognormalizedcounts.csv")

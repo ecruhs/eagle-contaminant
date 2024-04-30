@@ -114,10 +114,10 @@ res <- res[order(res$padj),]
 resSig <- subset(res, res$padj < 0.1) #setting p-value higher
 resSig<-resSig[ order( resSig$log2FoldChange ),]
 resSig_p01<-resSig[1:1822,] #all the results - 1822 genes is the length
-write.csv(resSig_p01,"output-data/resSig_p01.csv")
+write.csv(resSig_p01,"output-data/highvslow_lps/resSig_p01.csv")
 
 
 resSig <- subset(res, res$padj < 0.05) #setting p-value higher
 resSig<-resSig[ order( resSig$log2FoldChange ),]
 resSig_p005<-resSig[1:975,] #all the results - 975 genes is the length
-write.csv(resSig_p005,"output-data/resSig_p005.csv")
+write.csv(resSig_p005,"output-data/highvslow_lps/resSig_p005.csv")
